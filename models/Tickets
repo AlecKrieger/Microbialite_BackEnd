@@ -1,0 +1,38 @@
+createTicket = """CREATE TABLE Ticket (
+	ticketID INT PRIMARY KEY,
+    dateInputed DATE,
+    ticketDescription VARCHAR(50),
+    status VARCHAR(6) CHECK (status IN ("OPEN", "CLOSED")),
+    userID INT,
+    analystID INT,
+	FOREIGN KEY (userID) REFERENCES User(userID)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+    FOREIGN KEY (analystID) REFERENCES Analyst(analystID)
+    ON UPDATE CASCADE
+    ON DELETE SET NULL
+);"""
+
+createUserTicket = """CREATE TABLE User_Ticket (
+	userID INT,
+    ticketID INT,
+    PRIMARY KEY (userID, ticketID),
+    FOREIGN KEY (userID) REFERENCES User(userID)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+    FOREIGN KEY (ticketID) REFERENCES Ticket(ticketID)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+);"""
+
+createAnalystTicket = """CREATE TABLE Analyst_Ticket (
+	ticketID INT,
+    analystID INT,
+    PRIMARY KEY (analystID, ticketID),
+    FOREIGN KEY (analystID) REFERENCES Analyst(analystID)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+    FOREIGN KEY (ticketID) REFERENCES Ticket(ticketID)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+);"""
