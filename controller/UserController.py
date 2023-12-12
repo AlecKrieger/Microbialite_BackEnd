@@ -2,7 +2,7 @@ from dao import UserDao
 from models import Users
 from models import Analysts
 
-def createTables():
+def createUserTables():
     createUserTable = Users.createUserTable
     createAnalystTable = Analysts.createAnalystTable
 
@@ -13,7 +13,7 @@ def createTables():
         return {"Msg": "Could not create tables", "status_code":400}
     
     
-def dropTables():
+def dropUserTables():
     dropUserTable = Users.dropUserTable
     dropAnalystTable = Analysts.dropAnalystTable
 
