@@ -1,16 +1,16 @@
 createTicketTable = """CREATE TABLE Ticket (
-	ticketID INT UNSIGNED NOT NULL PRIMARY KEY,
+	ticketID INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     dateInputed DATE,
     ticketDescription VARCHAR(50),
     status VARCHAR(6) CHECK (status IN ("OPEN", "CLOSED")),
-    userID INT,
-    analystID INT,
+    userID INT UNSIGNED NOT NULL,
+    analystID INT UNSIGNED NOT NULL,
 	FOREIGN KEY (userID) REFERENCES User(userID)
     ON UPDATE CASCADE
     ON DELETE CASCADE,
     FOREIGN KEY (analystID) REFERENCES Analyst(analystID)
     ON UPDATE CASCADE
-    ON DELETE SET NULL
+    ON DELETE CASCADE
 );"""
 
 createUserTicketTable = """CREATE TABLE User_Ticket (
@@ -53,7 +53,7 @@ getTickets = "SELECT * FROM Ticket;"
 
 deleteTicketByID = "DELETE FROM Ticket WHERE ticketID = {ticketID};"
 
-insertTicket = "INSERT INTO Ticket VALUES (ticketDescription={ticketDescription}, status={status} userID={userID}, analystID={analystID});"
+insertTicket = "INSERT INTO Ticket (ticketDescription, dateInputed, status, userID, analystID) VALUES ('{ticketDescription}', CURDATE(), 'OPEN', {userID}, {analystID});"
 
 updateTicket = """UPDATE Ticket
-    SET ticketDescription={ticketDescription}, status={status} userID={userID}, analystID={analystID} WHERE ticketID={ticketID};"""
+    SET ticketDescription='{ticketDescription}', status='{status}', userID={userID}, analystID={analystID} WHERE ticketID={ticketID};"""

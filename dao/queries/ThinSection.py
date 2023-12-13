@@ -1,7 +1,7 @@
 createTSTable = """CREATE TABLE Thin_Section_Data(
-	thinSectionID INT AUTO_INCREMENT PRIMARY KEY,
+	thinSectionID INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	tsDescription VARCHAR(255),
-    mesostructureID INT,
+    mesostructureID INT UNSIGNED NOT NULL,
 	primaryTexture VARCHAR(50),
 	secondaryTexture VARCHAR(50),
     tertiaryTexture VARCHAR(50),
@@ -22,8 +22,8 @@ createTSTable = """CREATE TABLE Thin_Section_Data(
 );"""
 
 createSearchesTSTable = """CREATE TABLE Searches_Thin(
-	userID INT,
-	thinSectionID INT,
+	userID INT UNSIGNED NOT NULL,
+	thinSectionID INT UNSIGNED NOT NULL,
 	PRIMARY KEY(userID, thinSectionID),
 	FOREIGN KEY (userID) REFERENCES User(userID)
     ON UPDATE CASCADE
@@ -34,8 +34,8 @@ createSearchesTSTable = """CREATE TABLE Searches_Thin(
 );"""
 
 createAddTSTable = """CREATE TABLE Add_Thin_Data(
-	analystID INT,
-	thinSectionID INT,
+	analystID INT UNSIGNED NOT NULL,
+	thinSectionID INT UNSIGNED NOT NULL,
 	PRIMARY KEY(analystID, thinSectionID),
 	FOREIGN KEY (analystID) REFERENCES Analyst(analystID)
     ON UPDATE CASCADE
@@ -46,7 +46,7 @@ createAddTSTable = """CREATE TABLE Add_Thin_Data(
 );"""
 
 createPhotoTable = """CREATE TABLE THIN_SECTION_PHOTO(
-	thinSectionID INT,
+	thinSectionID INT UNSIGNED NOT NULL,
 	thinSectionPhotoID INT,
 	thinSectionPhoto VARCHAR(255),
 	PRIMARY KEY(thinSectionID, thinSectionPhotoID),

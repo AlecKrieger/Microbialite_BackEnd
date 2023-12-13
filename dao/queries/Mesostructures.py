@@ -1,9 +1,9 @@
 createMesoTable = """CREATE TABLE Mesostructure_Data(
-	mesostructureID INT AUTO_INCREMENT PRIMARY KEY,
+	mesostructureID INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	mesostructureType VARCHAR(50),
     mesostructureTexture VARCHAR(50),
     mesostructureDesc VARCHAR(255),
-    macrostructureID INT,
+    macrostructureID INT UNSIGNED NOT NULL,
     sampleSize VARCHAR(20),
     fieldDescription VARCHAR(255),
     rockDescription VARCHAR(255),
@@ -18,8 +18,8 @@ createMesoTable = """CREATE TABLE Mesostructure_Data(
 );"""
 
 createSearchesMesoTable = """CREATE TABLE Searches_Meso(
-	userID INT,
-	mesostructureID INT,
+	userID INT UNSIGNED NOT NULL,
+	mesostructureID INT UNSIGNED NOT NULL,
 	PRIMARY KEY(userID, mesostructureID),
 	FOREIGN KEY (userID) REFERENCES User(userID)       
 	ON UPDATE CASCADE
@@ -30,8 +30,8 @@ createSearchesMesoTable = """CREATE TABLE Searches_Meso(
 );"""
 
 createAddMesoTable = """CREATE TABLE Add_Meso_Data(
-	analystID INT,
-	mesostructureID INT,
+	analystID INT UNSIGNED NOT NULL,
+	mesostructureID INT UNSIGNED NOT NULL,
 	PRIMARY KEY(analystID, mesostructureID),
 	FOREIGN KEY (analystID) REFERENCES Analyst(analystID)
     ON UPDATE CASCADE
@@ -42,7 +42,7 @@ createAddMesoTable = """CREATE TABLE Add_Meso_Data(
 );"""
 
 createPhotoTable = """CREATE TABLE Mesostructure_Photo(
-	mesostructureID INT,
+	mesostructureID INT UNSIGNED NOT NULL,
 	mesoPhotoID INT,
 	mesoPhoto VARCHAR(255),
 	PRIMARY KEY(mesostructureID, mesoPhotoID),

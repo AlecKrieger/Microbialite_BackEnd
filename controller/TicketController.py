@@ -1,26 +1,51 @@
 from dao import TicketDao
-from models import Tickets
+from models.ticket import Ticket
+
+#TODO Update response statements
 
 def createTicketTables():
-    createTicketTable = Tickets.createTicketTable
-    createUserTicketTable = Tickets.createUserTicketTable
-    createAnalystTicketTable = Tickets.createAnalystTicketTable
-
-    success = TicketDao.createTables(createTicketTable, createUserTicketTable, createAnalystTicketTable)
-    if (success):
-        return {"Msg": "Ticket Tables Created", "status_code":200}
+    result = TicketDao.createTables()
+    if (result):
+        return {"Msg": "Ticket tables Created"}
     else:
-        return {"Msg": "Could not create tables", "status_code":400}
-    
+        return {"Msg": "Could not create Ticket tables"}
     
 def dropTicketTables():
-    dropTicketTable = Tickets.dropTicketTable
-    dropUserTicketTable = Tickets.dropUserTicketTable
-    dropAnalystTicketTable = Tickets.dropAnalystTicketTable
-
-    success = TicketDao.dropTables(dropTicketTable, dropUserTicketTable, dropAnalystTicketTable)
-
-    if (success):
-        return {"Msg": "Ticket Tables dropped", "status_code":200}
+    result = TicketDao.dropTables()
+    if (result):
+        return {"Msg": "Ticket tables dropped"}
     else:
-        return {"Msg": "Could not drop tables", "status_code":400}
+        return {"Msg": "Could not drop Ticket tables"}
+    
+def getTicketById(ticketID: int):
+    result = TicketDao.getTicket(ticketID)
+    return {"ticketID": ticketID, "Ticket": result}
+
+def getTickets():
+    result = TicketDao.getTickets()
+    return {"Tickets" : result}
+
+def getTicketsByUserId(userType, id):
+    result = TicketDao.getTicketByUser(userType, id)
+    return {"UserType": userType, "ID": id, "Tickets" : result}
+
+def deleteTicket(ticketID: int):
+    result = TicketDao.deleteTicket(ticketID)
+    if (result):
+        return {"Msg": f"Ticket #{ticketID} deleted"}
+    else:
+        return {"Msg": "Could not drop tables"}
+    
+def updateTicket(data: Ticket):
+    result = TicketDao.updateTicket(data.model_dump())
+    if (result):
+        return {"Msg": f'Ticket #{data.ticketID} updated'}
+    else:
+        return {"Msg": "Could not update ticket"}
+    
+def insertTicket(data : Ticket):
+    result = TicketDao.insertTicket(data.model_dump())
+    if (result):
+        return {"Msg": f'Ticket #{result} created'}
+    else:
+        return {"Msg": "Could not insert ticket"}

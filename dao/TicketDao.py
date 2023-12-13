@@ -1,71 +1,182 @@
 import MySQLdb
-from .connector import connectToDB
+from dao.connector import connectToDB
+from dao.queries import Tickets
 
-def createTables(createTicketTable, createUserTicketTable, createAnalystTicketTable):
-    success = False
+LASTINSERTQUERY = "SELECT LAST_INSERT_ID();"
+
+def createTables():
+    createTicketTable = Tickets.createTicketTable
+    # createUserTicketTable = Tickets.createUserTicketTable
+    # createAnalystTicketTable = Tickets.createAnalystTicketTable
+
+    result = False
     conn = connectToDB()
     try:
-        # Create a cursor to interact with the database
         cursor = conn.cursor()
 
-        # Create relevant tables
         cursor.execute(createTicketTable)
-        cursor.execute(createUserTicketTable)
-        cursor.execute(createAnalystTicketTable)
+        # cursor.execute(createUserTicketTable)
+        # cursor.execute(createAnalystTicketTable)
 
-        success = True
-
-        # # Execute "SHOW TABLES" query
-        # cursor.execute("SHOW TABLES")
-
-        # # Fetch all the rows
-        # tables = cursor.fetchall()
-
-        # # Print out the tables
-        # print("Tables in the database:")
-        # for table in tables:
-        #     print(table[0])
-
+        result = True
     except MySQLdb.Error as e:
         print("MySQL Error:", e)
 
     finally:
-        # Close the cursor and connection
         cursor.close()
         conn.close()
-    return success
+    return result
 
-def dropTables(dropTicketTable, dropAnalystTicketTable, dropUserTicketTable):
-    success = False
+def dropTables():
+    dropTicketTable = Tickets.dropTicketTable
+    # dropUserTicketTable = Tickets.dropUserTicketTable
+    # dropAnalystTicketTable = Tickets.dropAnalystTicketTable
+
+    result = False
     conn = connectToDB()
     try:
         cursor = conn.cursor()
 
-        cursor.execute(dropAnalystTicketTable)
-        cursor.execute(dropUserTicketTable)
+        # cursor.execute(dropAnalystTicketTable)
+        # cursor.execute(dropUserTicketTable)
         cursor.execute(dropTicketTable)
 
 
-        success = True
+        result = True
     except MySQLdb.Error as e:
         print("MySQL Error:", e)
 
     finally:
         cursor.close()
         conn.close()
-    return success
+    return result
 
-def addTicket():
-    pass
+def getTicket(ticketId):
+    result = None
+    conn = connectToDB()
+    query = Tickets.getTicketsByID.format(ticketID = ticketId)
+    try:
+        cursor = conn.cursor()
 
-def updateTicket():
-    pass
+        cursor.execute(query)
+
+        ticket = cursor.fetchall()
+
+        result = ticket
+    except MySQLdb.Error as e:
+        print("MySQL Error:", e)
+
+    finally:
+        cursor.close()
+        conn.close()
+    return result
+
+def getTicketByUser(userType: str, id: int):
+    query = None
+    if (userType == "user"):
+       query = Tickets.getTicketsByUser.format(userID = id)
+    elif (userType == "analyst"):
+        query = Tickets.getTicketsByAnalyst.format(analystID = id)
+    else:
+        return None
+    
+    result = None
+    conn = connectToDB()
+
+    try:
+        cursor = conn.cursor()
+
+        cursor.execute(query)
+
+        ticket = cursor.fetchall()
+
+        result = ticket
+    except MySQLdb.Error as e:
+        print("MySQL Error:", e)
+
+    finally:
+        cursor.close()
+        conn.close()
+    return result
+
+def getTickets():
+    result = None
+    conn = connectToDB()
+    query = Tickets.getTickets
+    try:
+        cursor = conn.cursor()
+
+        cursor.execute(query)
+
+        ticket = cursor.fetchall()
+
+        result = ticket
+    except MySQLdb.Error as e:
+        print("MySQL Error:", e)
+
+    finally:
+        cursor.close()
+        conn.close()
+    return result
+
+def insertTicket(data: dict):
+    result = None
+    conn = connectToDB()
+    query = Tickets.insertTicket.format(**data)
+    print(query)
+    try:
+        cursor = conn.cursor()
+
+        cursor.execute(query)
+        cursor.execute(LASTINSERTQUERY)
+        ticketID = cursor.fetchall()
+        print(ticketID)
+        # cursor.execute(query2)
+        # cursor.execute(query3)
+
+        result = ticketID
+    except MySQLdb.Error as e:
+        print("MySQL Error:", e)
+
+    finally:
+        cursor.close()
+        conn.close()
+    return result
+
+
+def updateTicket(data):
+    result = None
+    conn = connectToDB()
+    query = Tickets.updateTicket.format(**data)
+    try:
+        cursor = conn.cursor()
+
+        cursor.execute(query)
+        
+        result = True
+    except MySQLdb.Error as e:
+        print("MySQL Error:", e)
+
+    finally:
+        cursor.close()
+        conn.close()
+    return result
+
 
 def deleteTicket(ticketId):
-    pass
+    result = None
+    conn = connectToDB()
+    query = Tickets.deleteTicketByID.format(ticketID = ticketId)
+    try:
+        cursor = conn.cursor()
 
-def getTickets(ticketId):
-    pass
+        cursor.execute(query)
 
-def getTicket():
-    pass
+        result = True
+    except MySQLdb.Error as e:
+        print("MySQL Error:", e)
+
+    finally:
+        cursor.close()
+        conn.close()
+    return result

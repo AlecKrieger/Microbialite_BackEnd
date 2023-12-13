@@ -1,38 +1,36 @@
 from dao import UserDao
 from models.user import User, Analyst
-import json
-import sys
 
 
 def createUserTables():
     result = UserDao.createTables()
     if (result):
-        return {"Msg": "Ticket Tables Created"}
+        return {"Msg": "User and Analyst tables Created"}
     else:
-        return {"Msg": "Could not create tables"}
+        return {"Msg": "Could not create User and Analyst tables"}
     
     
 def dropUserTables():
     result = UserDao.dropTables()
 
     if (result):
-        return {"Msg": "Ticket Tables dropped"}
+        return {"Msg": "User and Analyst tables dropped"}
     else:
-        return {"Msg": "Could not drop tables"}
+        return {"Msg": "Could not drop User and Analyst tables"}
     
 def insertUser(userType: str, data):
     result = UserDao.addUser(userType, data.model_dump())
+    message = "Could not insert " + userType
     if (result):
-        return {"Msg": "Created user"}
-    else:
-        return {"Msg": "Could not create user"}
+        message = "Inserted " + userType
+    return {"Msg": message}
     
 def deleteUser(userType, userID):
     result = UserDao.deleteUser(userType, userID)
+    message = "Could not delete " + userType
     if (result):
-        return {"Msg": "Deleted user"}
-    else:
-        return {"Msg": "Could not delete user"}
+        message = "Deleted " + userType
+    return {"Msg": message}
 
 def getUsers(userType):
     result = UserDao.getUsers(userType)
@@ -45,7 +43,7 @@ def getUser(userType, userID):
 def updateUser(userType: str, data : User or Analyst):
     print(getColumnNames("User"))
     result = UserDao.updateUser(userType, data.model_dump())
+    message = "Could not update " + userType
     if (result):
-        return {"Msg": "updated user"}
-    else:
-        return {"Msg": "Could not update user"}
+        message = "Updated " + userType
+    return {"Msg": message}

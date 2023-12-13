@@ -1,9 +1,9 @@
 createMacroTable = """CREATE TABLE Macrostructure_Data(
-	macrostructureID INT AUTO_INCREMENT PRIMARY KEY,
+	macrostructureID INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	macrostructureType VARCHAR(50),
 	sectionHeight DECIMAL(5,2),
 	comments VARCHAR(255),
-    waypointID INT, 
+    waypointID INT UNSIGNED NOT NULL, 
     megastructureType VARCHAR(30),
     megastructureShape VARCHAR(30),
     megastructureSize VARCHAR(30),
@@ -30,7 +30,7 @@ createMacroTable = """CREATE TABLE Macrostructure_Data(
 
 createSearchesMacroTable = """CREATE TABLE Searches_Macro(
 	userID INT,
-	macrostructureID INT,
+	macrostructureID INT UNSIGNED NOT NULL,
 	PRIMARY KEY(userID, macrostructureID),
 	FOREIGN KEY (userID) REFERENCES User(userID)
     ON UPDATE CASCADE
@@ -41,8 +41,8 @@ createSearchesMacroTable = """CREATE TABLE Searches_Macro(
 );"""
 
 createAddMacroTable = """CREATE TABLE Add_Macro_Data(
-	analystID INT,
-	macrostructureID INT,
+	analystID INT UNSIGNED NOT NULL,
+	macrostructureID INT UNSIGNED NOT NULL,
 	PRIMARY KEY(analystID, macrostructureID),
 	FOREIGN KEY (analystID) REFERENCES Analyst(analystID)
     ON UPDATE CASCADE
@@ -53,7 +53,7 @@ createAddMacroTable = """CREATE TABLE Add_Macro_Data(
 );   """
 
 createPhotoTable = """CREATE TABLE Macrostructure_Photo(
-	macrostructureID INT,
+	macrostructureID INT UNSIGNED NOT NULL,
 	macroPhotoID INT,
 	macroPhoto VARCHAR(255),
 	PRIMARY KEY(macrostructureID, macroPhotoID),

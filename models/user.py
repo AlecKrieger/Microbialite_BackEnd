@@ -6,6 +6,7 @@ class User(BaseModel):
     lastName: str
 
 class Analyst(BaseModel):
-    userID: int
+    analystID: int
     firstName: str
     lastName: str
+    analystType: str

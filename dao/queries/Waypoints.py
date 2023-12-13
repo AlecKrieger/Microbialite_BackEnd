@@ -1,5 +1,5 @@
 createWaypointTable = """CREATE TABLE Waypoint_Data(
-	waypointID INT AUTO_INCREMENT PRIMARY KEY,
+	waypointID INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	dateCollected DATE,
 	waypointName VARCHAR(50),
 	projectName VARCHAR(50),
@@ -22,8 +22,8 @@ createWaypointTable = """CREATE TABLE Waypoint_Data(
 );"""
 
 createSearchesWaypointTable = """CREATE TABLE Searches_Waypoint(
-	userID INT,
-	waypointID INT,
+	userID INT UNSIGNED NOT NULL,
+	waypointID INT UNSIGNED NOT NULL,
 	PRIMARY KEY(userID, waypointID),
 	FOREIGN KEY (userID) REFERENCES User(userID)
     ON UPDATE CASCADE
@@ -34,8 +34,8 @@ createSearchesWaypointTable = """CREATE TABLE Searches_Waypoint(
 );"""
 
 createAddWaypointTable = """CREATE TABLE Searches_Waypoint(
-	userID INT,
-	waypointID INT,
+	userID INT UNSIGNED NOT NULL,
+	waypointID INT UNSIGNED NOT NULL,
 	PRIMARY KEY(userID, waypointID),
 	FOREIGN KEY (userID) REFERENCES User(userID)
     ON UPDATE CASCADE

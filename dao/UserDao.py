@@ -58,14 +58,13 @@ def dropTables():
         conn.close()
     return success
 
-def addUser(userType: int, data):
+def addUser(userType: int, data: dict):
     query = None
+    print(type(data))
     if (userType == 'user'):
-        query = Users.insertUser.format(firstName=data.get("firstName"), 
-                                        lastName = data.get("lastName"))
+        query = Users.insertUser.format(**data)
     elif (userType == 'analyst'):
-        query = Analysts.insertAnalyst.format(firstName=data.get("firstName"), 
-                                        lastName = data.get("lastName"))
+        query = Analysts.insertAnalyst.format(**data)
     else:
         return None
     conn = connectToDB()
@@ -170,9 +169,7 @@ def updateUser(userType: int, data):
         #                                 userID = data.get("userID"))
         query = Users.updateUser.format(**data)
     elif (userType == 'analyst'):
-        query = Analysts.updateAnalyst.format(firstName=data.get("firstName"), 
-                                        lastName = data.get("lastName"),
-                                        analystID = data.get("analystID"))
+        query = Analysts.updateAnalyst.format(**data)
     else:
         return None
     conn = connectToDB()
