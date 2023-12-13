@@ -1,9 +1,13 @@
 import MySQLdb
-from .connector import connectToDB
+from dao.connector import connectToDB
+from dao.queries import Users, Analysts
 
-def createTables(createUserTable, createAnalystTable):
+
+def createTables():
     success = False
     conn = connectToDB()
+    createUserTable = Users.createUserTable
+    createAnalystTable = Analysts.createAnalystTable
     try:
         # Create a cursor to interact with the database
         cursor = conn.cursor()
@@ -34,7 +38,9 @@ def createTables(createUserTable, createAnalystTable):
         conn.close()
     return success
 
-def dropTables(dropUserTable, dropAnalystTable):
+def dropTables():
+    dropUserTable = Users.dropUserTable
+    dropAnalystTable = Analysts.dropAnalystTable
     success = False
     conn = connectToDB()
     try:
@@ -52,17 +58,135 @@ def dropTables(dropUserTable, dropAnalystTable):
         conn.close()
     return success
 
-def addUser():
-    pass
+def addUser(userType: int, data):
+    query = None
+    if (userType == 'user'):
+        query = Users.insertUser.format(firstName=data.get("firstName"), 
+                                        lastName = data.get("lastName"))
+    elif (userType == 'analyst'):
+        query = Analysts.insertAnalyst.format(firstName=data.get("firstName"), 
+                                        lastName = data.get("lastName"))
+    else:
+        return None
+    conn = connectToDB()
+    success = None
+
+    try:
+        cursor = conn.cursor()
+        cursor.execute(query)
+
+        success = True
+    except MySQLdb.Error as e:
+        print("MySQL Error:", e)
+
+    finally:
+        cursor.close()
+        conn.close()
+    return success
+
 
 def updateUser():
     pass
 
-def deleteUser(ticketId):
-    pass
+#Delete a single user or analyst by ID
+def deleteUser(userType, userID):
+    query = None
+    if (userType == 'user'):
+        query = Users.deleteUser.format(userID = userID)
+        print(query)
+    elif (userType == 'analyst'):
+        query = Analysts.deleteAnalyst.format(analystID = userID)
+    else:
+        return None
+    conn = connectToDB()
+    success = None
+    try:
+        cursor = conn.cursor()
+        cursor.execute(query)
 
-def getUsers(ticketId):
-    pass
+        success = True
+    except MySQLdb.Error as e:
+        print("MySQL Error:", e)
 
-def getUser():
-    pass
+    finally:
+        cursor.close()
+        conn.close()
+    return success
+
+#Get all users or all analysts
+def getUsers(userType):
+    query = None
+    if (userType == 'user'):
+        query = Users.getUsers
+        print(query)
+    elif (userType == 'analyst'):
+        query = Analysts.getAnalysts
+    else:
+        return None
+    conn = connectToDB()
+    success = None
+    try:
+        cursor = conn.cursor()
+        cursor.execute(query)
+        users = cursor.fetchall()
+        success = users
+    except MySQLdb.Error as e:
+        print("MySQL Error:", e)
+
+    finally:
+        cursor.close()
+        conn.close()
+    return success
+
+#Get a single user or analyst by id
+def getUser(userType, userID):
+    query = None
+    if (userType == 'user'):
+        query = Users.getUserByID.format(userID = userID)
+        print(query)
+    elif (userType == 'analyst'):
+        query = Analysts.getAnalysts.format(analystID = userID)
+    else:
+        return None
+    conn = connectToDB()
+    success = None
+    try:
+        cursor = conn.cursor()
+        cursor.execute(query)
+        users = cursor.fetchall()
+        success = users
+    except MySQLdb.Error as e:
+        print("MySQL Error:", e)
+    finally:
+        cursor.close()
+        conn.close()
+    return success
+
+def updateUser(userType: int, data):
+    query = None
+    if (userType == 'user'):
+        # query = Users.updateUser.format(firstName=data.get("firstName"), 
+        #                                 lastName = data.get("lastName"),
+        #                                 userID = data.get("userID"))
+        query = Users.updateUser.format(**data)
+    elif (userType == 'analyst'):
+        query = Analysts.updateAnalyst.format(firstName=data.get("firstName"), 
+                                        lastName = data.get("lastName"),
+                                        analystID = data.get("analystID"))
+    else:
+        return None
+    conn = connectToDB()
+    success = None
+
+    try:
+        cursor = conn.cursor()
+        cursor.execute(query)
+
+        success = True
+    except MySQLdb.Error as e:
+        print("MySQL Error:", e)
+
+    finally:
+        cursor.close()
+        conn.close()
+    return success
