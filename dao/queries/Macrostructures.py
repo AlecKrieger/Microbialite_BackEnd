@@ -114,7 +114,7 @@ deleteData = """DELETE FROM Macrostructure_Data
 
 
 # Searches_Macro
-createSearchesMacroTable = """CREATE TABLE Searches_Macro(
+createSearchesTable = """CREATE TABLE Searches_Macro(
 	userID INT,
 	macrostructureID INT UNSIGNED NOT NULL,
 	PRIMARY KEY(userID, macrostructureID),
