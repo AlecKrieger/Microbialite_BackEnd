@@ -116,9 +116,8 @@ deleteSearches = """DELETE FROM Searches_Thin
                     AND 
                     thinSectionID = {thinSectionID};"""
 
-
-
-createAddTSTable = """CREATE TABLE Add_Thin_Data(
+# Add_Thin_Data
+createAddTable = """CREATE TABLE Add_Thin_Data(
 	analystID INT UNSIGNED NOT NULL,
 	thinSectionID INT UNSIGNED NOT NULL,
 	PRIMARY KEY(analystID, thinSectionID),
@@ -129,6 +128,29 @@ createAddTSTable = """CREATE TABLE Add_Thin_Data(
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );"""
+dropAddTable = "DROP TABLE IF EXISTS Add_Thin_Data;"
+getAdd = "SELECT * FROM Add_Thin_Data;"
+getAddByID = """SELECT * FROM Add_Thin_Data 
+                WHERE 
+                analystID = {analystID} 
+                AND 
+                thinSectionID = {thinSectionID};"""
+insertAdd = """INSERT INTO Add_Thin_Data (analystID, thinSectionID) 
+                VALUES 
+                ({analystID}, {thinSectionID});"""
+updateAdd = """UPDATE Add_Thin_Data 
+                SET 
+                analystID = {newAnalystID} 
+                WHERE 
+                analystID = {currentAnalystID} 
+                AND 
+                thinSectionID = {thinSectionID};"""
+deleteAdd = """DELETE FROM Add_Thin_Data 
+                WHERE 
+                analystID = {analystID} 
+                AND 
+                thinSectionID = {thinSectionID};"""
+
 
 createPhotoTable = """CREATE TABLE THIN_SECTION_PHOTO(
 	thinSectionID INT UNSIGNED NOT NULL,
@@ -139,8 +161,5 @@ createPhotoTable = """CREATE TABLE THIN_SECTION_PHOTO(
     ON UPDATE CASCADE
     ON DELETE CASCADE);"""
 
-
-
-dropAddDataTable = "DROP TABLE IF EXISTS Add_Thin_Data;"
 
 dropPhotoTable = "DROP TABLE IF EXISTS THIN_SECTION_PHOTO;"
