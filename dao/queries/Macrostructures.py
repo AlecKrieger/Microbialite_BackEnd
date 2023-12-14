@@ -1,4 +1,5 @@
-createMacroTable = """CREATE TABLE Macrostructure_Data(
+# Macrostructure_Data
+createDataTable = """CREATE TABLE Macrostructure_Data(
 	macrostructureID INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	macrostructureType VARCHAR(50),
 	sectionHeight DECIMAL(5,2),
@@ -27,6 +28,93 @@ createMacroTable = """CREATE TABLE Macrostructure_Data(
     ON UPDATE CASCADE
     ON DELETE SET NULL
 );"""
+dropDataTable = "DROP TABLE IF EXISTS Macrostructure_Data;"
+getData = "SELECT * FROM Macrostructure_Data;"
+getDataByID = """SELECT * FROM Macrostructure_Data 
+                WHERE 
+                macrostructureID = {macrostructureID};"""
+insertData = """INSERT INTO Macrostructure_Data (
+    macrostructureType, 
+    sectionHeight, 
+    comments, 
+    waypointID, 
+    megastructureType, 
+    megastructureShape, 
+    megastructureSize, 
+    substrate, 
+    initiation, 
+    planView, 
+    linkage, 
+    spacing, 
+    shape, 
+    shapelayering, 
+    shapeDome, 
+    shape3d, 
+    aspectRation, 
+    growthVariability, 
+    attitude, 
+    branchingStyle, 
+    branchingMode, 
+    branchingAngle, 
+    columnShape
+) VALUES (
+    '{macrostructureType}', 
+    {sectionHeight}, 
+    '{comments}', 
+    {waypointID}, 
+    '{megastructureType}', 
+    '{megastructureShape}', 
+    '{megastructureSize}', 
+    '{substrate}', 
+    '{initiation}', 
+    '{planView}', 
+    '{linkage}', 
+    '{spacing}', 
+    '{shape}', 
+    '{shapelayering}', 
+    '{shapeDome}', 
+    '{shape3d}', 
+    '{aspectRation}', 
+    '{growthVariability}', 
+    '{attitude}', 
+    '{branchingStyle}', 
+    '{branchingMode}', 
+    '{branchingAngle}', 
+    '{columnShape}'
+);"""
+updateData = """UPDATE Macrostructure_Data SET 
+    macrostructureType='{macrostructureType}', 
+    sectionHeight={sectionHeight}, 
+    comments='{comments}', 
+    waypointID={waypointID}, 
+    megastructureType='{megastructureType}', 
+    megastructureShape='{megastructureShape}', 
+    megastructureSize='{megastructureSize}', 
+    substrate='{substrate}', 
+    initiation='{initiation}', 
+    planView='{planView}', 
+    linkage='{linkage}', 
+    spacing='{spacing}', 
+    shape='{shape}', 
+    shapelayering='{shapelayering}', 
+    shapeDome='{shapeDome}', 
+    shape3d='{shape3d}', 
+    aspectRation='{aspectRation}', 
+    growthVariability='{growthVariability}', 
+    attitude='{attitude}', 
+    branchingStyle='{branchingStyle}', 
+    branchingMode='{branchingMode}', 
+    branchingAngle='{branchingAngle}', 
+    columnShape='{columnShape}' 
+    WHERE 
+    macrostructureID = {macrostructureID};"""
+deleteData = """DELETE FROM Macrostructure_Data 
+                WHERE 
+                macrostructureID = {macrostructureID};"""
+
+
+
+
 
 createSearchesMacroTable = """CREATE TABLE Searches_Macro(
 	userID INT,
@@ -62,7 +150,6 @@ createPhotoTable = """CREATE TABLE Macrostructure_Photo(
     ON DELETE CASCADE
 );"""
 
-dropDataTable = "DROP TABLE IF EXISTS Macrostructure_Data;"
 
 dropSearchesTable = "DROP TABLE IF EXISTS Searches_Macro;"
 
