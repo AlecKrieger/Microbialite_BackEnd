@@ -89,8 +89,8 @@ updateData = """UPDATE Waypoint_Data
                 waypointID = {waypointID};"""
 deleteData = "DELETE FROM Waypoint_Data WHERE waypointID = {waypointID};"
 
-
-createSearchesWaypointTable = """CREATE TABLE Searches_Waypoint(
+# Searches_Waypoint
+createSearchesTable = """CREATE TABLE Searches_Waypoint(
 	userID INT UNSIGNED NOT NULL,
 	waypointID INT UNSIGNED NOT NULL,
 	PRIMARY KEY(userID, waypointID),
@@ -101,6 +101,29 @@ createSearchesWaypointTable = """CREATE TABLE Searches_Waypoint(
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );"""
+dropSearchesTable = "DROP TABLE IF EXISTS Searches_Waypoint;"
+getSearches = "SELECT * FROM Searches_Waypoint;"
+getSearchesByID = """SELECT * FROM Searches_Waypoint 
+                    WHERE 
+                    userID = {userID} 
+                    AND 
+                    waypointID = {waypointID};"""
+insertSearches = """INSERT INTO Searches_Waypoint (userID, waypointID) 
+                    VALUES 
+                    ({userID}, {waypointID});"""
+updateSearches = """UPDATE Searches_Waypoint 
+                    SET 
+                    userID = {newUserID} 
+                    WHERE 
+                    userID = {currentUserID} 
+                    AND 
+                    waypointID = {waypointID};"""
+deleteSearches = """DELETE FROM Searches_Waypoint 
+                    WHERE 
+                    userID = {userID} 
+                    AND 
+                    waypointID = {waypointID};"""
+
 
 createAddWaypointTable = """CREATE TABLE Searches_Waypoint(
 	userID INT UNSIGNED NOT NULL,
@@ -113,7 +136,5 @@ createAddWaypointTable = """CREATE TABLE Searches_Waypoint(
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );"""
-
-dropSearchesWaypointTable = "DROP TABLE IF EXISTS Searches_Waypoint;"
 
 dropAddWaypointTable = "DROP TABLE IF EXISTS Add_Waypoint_Data;"
