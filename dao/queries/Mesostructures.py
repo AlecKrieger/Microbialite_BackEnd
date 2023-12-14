@@ -151,24 +151,24 @@ deleteAddData = """DELETE FROM Add_Meso_Data
 
 # Mesostructure_Photo
 dropPhotoTable = "DROP TABLE IF EXISTS Mesostructure_Photo;"
-getMesostructurePhotos = "SELECT * FROM Mesostructure_Photo;"
-getMesostructurePhotoByIDs = """SELECT * FROM Mesostructure_Photo 
-                                WHERE 
-                                mesostructureID = {mesostructureID} 
-                                AND 
-                                mesoPhotoID = {mesoPhotoID};"""
-insertMesostructurePhoto = """INSERT INTO Mesostructure_Photo (mesostructureID, mesoPhotoID, mesoPhoto) 
-                              VALUES 
-                              ({mesostructureID}, {mesoPhotoID}, '{mesoPhoto}');"""
-updateMesostructurePhoto = """UPDATE Mesostructure_Photo 
-                              SET 
-                              mesoPhoto='{mesoPhoto}' 
-                              WHERE 
-                              mesostructureID = {mesostructureID} 
-                              AND 
-                              mesoPhotoID = {mesoPhotoID};"""
-deleteMesostructurePhoto = """DELETE FROM Mesostructure_Photo 
-                              WHERE 
-                              mesostructureID = {mesostructureID} 
-                              AND 
-                              mesoPhotoID = {mesoPhotoID};"""
+getPhotos = "SELECT * FROM Mesostructure_Photo;"
+getPhotoByIDs = """SELECT * FROM Mesostructure_Photo 
+                   WHERE 
+                   mesostructureID = {mesostructureID} 
+                   AND 
+                   mesoPhotoID = {mesoPhotoID};"""
+insertPhoto = """INSERT INTO Mesostructure_Photo (mesostructureID, mesoPhotoID, mesoPhoto) 
+                 VALUES 
+                 ({mesostructureID}, {mesoPhotoID}, '{mesoPhoto}');"""
+updatePhoto = """UPDATE Mesostructure_Photo 
+                 SET 
+                 mesoPhoto='{mesoPhoto}' 
+                 WHERE 
+                 mesostructureID = {mesostructureID} 
+                 AND 
+                 mesoPhotoID = {mesoPhotoID};"""
+deletePhoto = """DELETE FROM Mesostructure_Photo 
+                 WHERE 
+                 mesostructureID = {mesostructureID} 
+                 AND 
+                 mesoPhotoID = {mesoPhotoID};"""
