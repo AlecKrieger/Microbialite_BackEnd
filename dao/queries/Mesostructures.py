@@ -51,7 +51,55 @@ createPhotoTable = """CREATE TABLE Mesostructure_Photo(
     ON DELETE CASCADE
 );"""
 
-dropDataTable = "DROP TABLE IF EXISTS Mesostructure_Data;"
+# Mesostructure_Data
+dropData = "DROP TABLE IF EXISTS Mesostructure_Data;"
+getData = "SELECT * FROM Mesostructure_Data;"
+getDataByID = "SELECT * FROM Mesostructure_Data WHERE mesostructureID = {mesostructureID};"
+insertData = """INSERT INTO Mesostructure_Data (
+    mesostructureType, 
+    mesostructureTexture, 
+    mesostructureDesc, 
+    macrostructureID, 
+    sampleSize, 
+    fieldDescription, 
+    rockDescription, 
+    laminaThickness, 
+    synopticRelief, 
+    wavelength, 
+    amplitude, 
+    mesostructureGrains
+) VALUES (
+    '{mesostructureType}', 
+    '{mesostructureTexture}', 
+    '{mesostructureDesc}', 
+    {macrostructureID}, 
+    '{sampleSize}', 
+    '{fieldDescription}', 
+    '{rockDescription}', 
+    {laminaThickness}, 
+    {synopticRelief}, 
+    {wavelength}, 
+    {amplitude}, 
+    '{mesostructureGrains}');"""
+
+updateData = """UPDATE Mesostructure_Data SET 
+    mesostructureType='{mesostructureType}', 
+    mesostructureTexture='{mesostructureTexture}', 
+    mesostructureDesc='{mesostructureDesc}', 
+    macrostructureID={macrostructureID}, 
+    sampleSize='{sampleSize}', 
+    fieldDescription='{fieldDescription}', 
+    rockDescription='{rockDescription}', 
+    laminaThickness={laminaThickness}, 
+    synopticRelief={synopticRelief}, 
+    wavelength={wavelength}, 
+    amplitude={amplitude}, 
+    mesostructureGrains='{mesostructureGrains}' 
+    WHERE 
+    mesostructureID = {mesostructureID};"""
+
+deleteData = "DELETE FROM Mesostructure_Data WHERE mesostructureID = {mesostructureID};"
+
 
 dropSearchesTable = "DROP TABLE IF EXISTS Searches_Meso;"
 
