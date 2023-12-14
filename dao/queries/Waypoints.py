@@ -137,4 +137,25 @@ createAddTable = """CREATE TABLE Add_Waypoint(
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );"""
-
+dropAddTable = "DROP TABLE IF EXISTS Add_Waypoint;"
+getAdd = "SELECT * FROM Add_Waypoint;"
+getAddByID = """SELECT * FROM Add_Waypoint 
+                WHERE 
+                userID = {userID} 
+                AND 
+                waypointID = {waypointID};"""
+insertAdd = """INSERT INTO Add_Waypoint (userID, waypointID) 
+                VALUES 
+                ({userID}, {waypointID});"""
+updateAdd = """UPDATE Add_Waypoint 
+                SET 
+                serID = {newUserID} 
+                WHERE 
+                userID = {currentUserID} 
+                AND 
+                waypointID = {waypointID};"""
+deleteAdd = """DELETE FROM Add_Waypoint 
+                WHERE 
+                userID = {userID} 
+                AND 
+                waypointID = {waypointID};"""
