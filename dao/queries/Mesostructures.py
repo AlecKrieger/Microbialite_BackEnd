@@ -1,12 +1,3 @@
-# Convention
-# create<name>Table
-# drop<name>Table
-# get<name>
-# get<name>ByID
-# insert<name>
-# update<name>
-# delete<name>
-
 # Mesostructure_Data
 createDataTable = """CREATE TABLE Mesostructure_Data(
 	mesostructureID INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
