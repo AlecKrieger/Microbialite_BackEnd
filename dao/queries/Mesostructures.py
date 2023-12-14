@@ -109,9 +109,11 @@ getSearchesByIDs = """SELECT * FROM Searches_Meso
                     AND 
                     mesostructureID = {mesostructureID};"""
 insertSearches = """INSERT INTO Searches_Meso (userID, mesostructureID) 
-                  VALUES 
-                  ({userID}, {mesostructureID});"""
-updateSearches = """UPDATE Searches_Meso SET userID = {newUserID} 
+                    VALUES 
+                    ({userID}, {mesostructureID});"""
+updateSearches = """UPDATE Searches_Meso 
+                    SET 
+                    userID = {newUserID} 
                     WHERE 
                     userID = {currentUserID} 
                     AND 
@@ -127,20 +129,46 @@ deleteSearches = """DELETE FROM Searches_Meso
 dropAddDataTable = "DROP TABLE IF EXISTS Add_Meso_Data;"
 getAddData = "SELECT * FROM Add_Meso_Data;"
 getAddDataByIDs = """SELECT * FROM Add_Meso_Data 
-                         WHERE analystID = {analystID} 
-                         AND 
-                         mesostructureID = {mesostructureID};"""
+                     WHERE 
+                     analystID = {analystID} 
+                     AND 
+                     mesostructureID = {mesostructureID};"""
 insertAddData = """INSERT INTO Add_Meso_Data (analystID, mesostructureID) 
-                       VALUES 
-                       ({analystID}, {mesostructureID});"""
-updateAddData = """UPDATE Add_Meso_Data SET analystID = {newAnalystID} 
-                       WHERE analystID = {currentAnalystID} 
-                       AND 
-                       mesostructureID = {mesostructureID};"""
+                   VALUES 
+                   ({analystID}, {mesostructureID});"""
+updateAddData = """UPDATE Add_Meso_Data 
+                   SET 
+                   analystID = {newAnalystID} 
+                   WHERE 
+                   analystID = {currentAnalystID} 
+                   AND 
+                   mesostructureID = {mesostructureID};"""
 deleteAddData = """DELETE FROM Add_Meso_Data 
-                       WHERE analystID = {analystID} 
-                       AND 
-                       mesostructureID = {mesostructureID};"""
+                   WHERE 
+                   analystID = {analystID} 
+                   AND 
+                   mesostructureID = {mesostructureID};"""
 
-
+# Mesostructure_Photo
 dropPhotoTable = "DROP TABLE IF EXISTS Mesostructure_Photo;"
+getMesostructurePhotos = "SELECT * FROM Mesostructure_Photo;"
+getMesostructurePhotoByIDs = """SELECT * FROM Mesostructure_Photo 
+                                WHERE 
+                                mesostructureID = {mesostructureID} 
+                                AND 
+                                mesoPhotoID = {mesoPhotoID};"""
+insertMesostructurePhoto = """INSERT INTO Mesostructure_Photo (mesostructureID, mesoPhotoID, mesoPhoto) 
+                              VALUES 
+                              ({mesostructureID}, {mesoPhotoID}, '{mesoPhoto}');"""
+updateMesostructurePhoto = """UPDATE Mesostructure_Photo 
+                              SET 
+                              mesoPhoto='{mesoPhoto}' 
+                              WHERE 
+                              mesostructureID = {mesostructureID} 
+                              AND 
+                              mesoPhotoID = {mesoPhotoID};"""
+deleteMesostructurePhoto = """DELETE FROM Mesostructure_Photo 
+                              WHERE 
+                              mesostructureID = {mesostructureID} 
+                              AND 
+                              mesoPhotoID = {mesoPhotoID};"""
