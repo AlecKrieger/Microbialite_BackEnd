@@ -125,7 +125,8 @@ deleteSearches = """DELETE FROM Searches_Waypoint
                     waypointID = {waypointID};"""
 
 
-createAddWaypointTable = """CREATE TABLE Searches_Waypoint(
+# Add_Waypoint
+createAddTable = """CREATE TABLE Add_Waypoint(
 	userID INT UNSIGNED NOT NULL,
 	waypointID INT UNSIGNED NOT NULL,
 	PRIMARY KEY(userID, waypointID),
@@ -137,4 +138,3 @@ createAddWaypointTable = """CREATE TABLE Searches_Waypoint(
     ON DELETE CASCADE
 );"""
 
-dropAddWaypointTable = "DROP TABLE IF EXISTS Add_Waypoint_Data;"
