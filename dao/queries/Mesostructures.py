@@ -100,8 +100,29 @@ updateData = """UPDATE Mesostructure_Data SET
 
 deleteData = "DELETE FROM Mesostructure_Data WHERE mesostructureID = {mesostructureID};"
 
-
+# Searches_Meso
 dropSearchesTable = "DROP TABLE IF EXISTS Searches_Meso;"
+getSearches = "SELECT * FROM Searches_Meso;"
+getSearchesByIDs = """SELECT * FROM Searches_Meso 
+                    WHERE 
+                    userID = {userID} 
+                    AND 
+                    mesostructureID = {mesostructureID};"""
+insertSearches = """INSERT INTO Searches_Meso (userID, mesostructureID) 
+                  VALUES 
+                  ({userID}, {mesostructureID});"""
+updateSearches = """UPDATE Searches_Meso SET userID = {newUserID} 
+                    WHERE 
+                    userID = {currentUserID} 
+                    AND 
+                    mesostructureID = {mesostructureID};"""
+deleteSearches = """DELETE FROM Searches_Meso 
+                    WHERE 
+                    userID = {userID} 
+                    AND 
+                    mesostructureID = {mesostructureID};"""
+
+
 
 dropAddDataTable = "DROP TABLE IF EXISTS Add_Meso_Data;"
 
