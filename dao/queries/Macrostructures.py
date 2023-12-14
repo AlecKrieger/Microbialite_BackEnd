@@ -113,9 +113,7 @@ deleteData = """DELETE FROM Macrostructure_Data
                 macrostructureID = {macrostructureID};"""
 
 
-
-
-
+# Searches_Macro
 createSearchesMacroTable = """CREATE TABLE Searches_Macro(
 	userID INT,
 	macrostructureID INT UNSIGNED NOT NULL,
@@ -127,6 +125,30 @@ createSearchesMacroTable = """CREATE TABLE Searches_Macro(
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );"""
+dropSearchesTable = "DROP TABLE IF EXISTS Searches_Macro;"
+getSearches = "SELECT * FROM Searches_Macro;"
+getSearchesByID = """SELECT * FROM Searches_Macro 
+                    WHERE 
+                    userID = {userID} 
+                    AND 
+                    macrostructureID = {macrostructureID};"""
+insertSearches = """INSERT INTO Searches_Macro (userID, macrostructureID) 
+                    VALUES 
+                    ({userID}, {macrostructureID});"""
+updateSearches = """UPDATE Searches_Macro 
+                    SET 
+                    macrostructureID = {newMacrostructureID} 
+                    WHERE 
+                    userID = {userID} 
+                    AND 
+                    macrostructureID = {currentMacrostructureID};"""
+deleteSearches = """DELETE FROM Searches_Macro 
+                    WHERE 
+                    userID = {userID} 
+                    AND 
+                    macrostructureID = {macrostructureID};"""
+
+
 
 createAddMacroTable = """CREATE TABLE Add_Macro_Data(
 	analystID INT UNSIGNED NOT NULL,
@@ -150,8 +172,6 @@ createPhotoTable = """CREATE TABLE Macrostructure_Photo(
     ON DELETE CASCADE
 );"""
 
-
-dropSearchesTable = "DROP TABLE IF EXISTS Searches_Macro;"
 
 dropAddDataTable = "DROP TABLE IF EXISTS Add_Macro_Data;"
 
