@@ -185,8 +185,7 @@ deleteAdd = """DELETE FROM Add_Macro_Data
                 macrostructureID = {macrostructureID};"""
 
 
-
-
+# Macrostructure_Photo
 createPhotoTable = """CREATE TABLE Macrostructure_Photo(
 	macrostructureID INT UNSIGNED NOT NULL,
 	macroPhotoID INT,
@@ -196,7 +195,25 @@ createPhotoTable = """CREATE TABLE Macrostructure_Photo(
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );"""
-
-
-
 dropPhotoTable = "DROP TABLE IF EXISTS Macrostructure_Photo;"
+getPhoto = "SELECT * FROM Macrostructure_Photo;"
+getPhotoByID = """SELECT * FROM Macrostructure_Photo 
+                WHERE 
+                macrostructureID = {macrostructureID} 
+                AND 
+                macroPhotoID = {macroPhotoID};"""
+insertPhoto = """INSERT INTO Macrostructure_Photo (macrostructureID, macroPhotoID, macroPhoto) 
+                VALUES 
+                ({macrostructureID}, {macroPhotoID}, '{macroPhoto}');"""
+updatePhoto = """UPDATE Macrostructure_Photo 
+                SET 
+                macroPhoto='{macroPhoto}' 
+                WHERE 
+                macrostructureID = {macrostructureID} 
+                AND 
+                macroPhotoID = {macroPhotoID};"""
+deletePhoto = """DELETE FROM Macrostructure_Photo 
+                WHERE 
+                macrostructureID = {macrostructureID} 
+                AND 
+                macroPhotoID = {macroPhotoID};"""
