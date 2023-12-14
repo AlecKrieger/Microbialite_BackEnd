@@ -1,4 +1,5 @@
-createTSTable = """CREATE TABLE Thin_Section_Data(
+# Thin_Section_Data
+createDataTable = """CREATE TABLE Thin_Section_Data(
 	thinSectionID INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	tsDescription VARCHAR(255),
     mesostructureID INT UNSIGNED NOT NULL,
@@ -20,8 +21,68 @@ createTSTable = """CREATE TABLE Thin_Section_Data(
     ON UPDATE CASCADE
     ON DELETE SET NULL
 );"""
+dropDataTable = "DROP TABLE IF EXISTS Thin_Section_Data;"
+getData = "SELECT * FROM Thin_Section_Data;"
+getDataByID = "SELECT * FROM Thin_Section_Data WHERE thinSectionID = {thinSectionID};"
+insertData = """INSERT INTO Thin_Section_Data (
+                tsDescription, 
+                mesostructureID, 
+                primaryTexture, 
+                secondaryTexture, 
+                tertiaryTexture, 
+                otherTexture, 
+                cement1, 
+                cement2, 
+                porosity1, 
+                porosity2, 
+                mineralogy1, 
+                mineralogy2, 
+                porosityPercentEst, 
+                cementFillPorosity, 
+                clasticGrain1, 
+                clasticGrain2
+                ) VALUES (
+                '{tsDescription}', 
+                {mesostructureID}, 
+                '{primaryTexture}', 
+                '{secondaryTexture}', 
+                '{tertiaryTexture}', 
+                '{otherTexture}', 
+                '{cement1}', 
+                '{cement2}', 
+                '{porosity1}', 
+                '{porosity2}', 
+                '{mineralogy1}', 
+                '{mineralogy2}', 
+                {porosityPercentEst}, 
+                '{cementFillPorosity}', 
+                '{clasticGrain1}', 
+                '{clasticGrain2}');"""
+updateData = """UPDATE Thin_Section_Data SET 
+                tsDescription='{tsDescription}', 
+                mesostructureID={mesostructureID}, 
+                primaryTexture='{primaryTexture}', 
+                secondaryTexture='{secondaryTexture}', 
+                tertiaryTexture='{tertiaryTexture}', 
+                otherTexture='{otherTexture}', 
+                cement1='{cement1}', 
+                cement2='{cement2}', 
+                porosity1='{porosity1}', 
+                porosity2='{porosity2}', 
+                mineralogy1='{mineralogy1}', 
+                mineralogy2='{mineralogy2}', 
+                porosityPercentEst={porosityPercentEst}, 
+                cementFillPorosity='{cementFillPorosity}', 
+                clasticGrain1='{clasticGrain1}', 
+                clasticGrain2='{clasticGrain2}' 
+                WHERE 
+                thinSectionID = {thinSectionID};"""
+deleteData = """DELETE FROM Thin_Section_Data 
+                WHERE 
+                thinSectionID = {thinSectionID};"""
 
-createSearchesTSTable = """CREATE TABLE Searches_Thin(
+# Searches_Thin
+createSearchesTable = """CREATE TABLE Searches_Thin(
 	userID INT UNSIGNED NOT NULL,
 	thinSectionID INT UNSIGNED NOT NULL,
 	PRIMARY KEY(userID, thinSectionID),
@@ -32,8 +93,31 @@ createSearchesTSTable = """CREATE TABLE Searches_Thin(
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );"""
+dropSearchesTable = "DROP TABLE IF EXISTS Searches_Thin;"
+getSearches = "SELECT * FROM Searches_Thin;"
+getSearchesByID = """SELECT * FROM Searches_Thin 
+                    WHERE 
+                    userID = {userID} 
+                    AND 
+                    thinSectionID = {thinSectionID};"""
+insertSearches = """INSERT INTO Searches_Thin (userID, thinSectionID) 
+                    VALUES 
+                    ({userID}, {thinSectionID});"""
+updateSearches = """UPDATE Searches_Thin 
+                    SET 
+                    userID = {newUserID} 
+                    WHERE 
+                    userID = {currentUserID} 
+                    AND 
+                    thinSectionID = {thinSectionID};"""
+deleteSearches = """DELETE FROM Searches_Thin 
+                    WHERE 
+                    userID = {userID} 
+                    AND 
+                    thinSectionID = {thinSectionID};"""
 
-createAddTSTable = """CREATE TABLE Add_Thin_Data(
+# Add_Thin_Data
+createAddTable = """CREATE TABLE Add_Thin_Data(
 	analystID INT UNSIGNED NOT NULL,
 	thinSectionID INT UNSIGNED NOT NULL,
 	PRIMARY KEY(analystID, thinSectionID),
@@ -44,8 +128,31 @@ createAddTSTable = """CREATE TABLE Add_Thin_Data(
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );"""
+dropAddTable = "DROP TABLE IF EXISTS Add_Thin_Data;"
+getAdd = "SELECT * FROM Add_Thin_Data;"
+getAddByID = """SELECT * FROM Add_Thin_Data 
+                WHERE 
+                analystID = {analystID} 
+                AND 
+                thinSectionID = {thinSectionID};"""
+insertAdd = """INSERT INTO Add_Thin_Data (analystID, thinSectionID) 
+                VALUES 
+                ({analystID}, {thinSectionID});"""
+updateAdd = """UPDATE Add_Thin_Data 
+                SET 
+                analystID = {newAnalystID} 
+                WHERE 
+                analystID = {currentAnalystID} 
+                AND 
+                thinSectionID = {thinSectionID};"""
+deleteAdd = """DELETE FROM Add_Thin_Data 
+                WHERE 
+                analystID = {analystID} 
+                AND 
+                thinSectionID = {thinSectionID};"""
 
-createPhotoTable = """CREATE TABLE THIN_SECTION_PHOTO(
+# Thin_Section_Photo
+createPhotoTable = """CREATE TABLE Thin_Section_Photo(
 	thinSectionID INT UNSIGNED NOT NULL,
 	thinSectionPhotoID INT,
 	thinSectionPhoto VARCHAR(255),
@@ -53,11 +160,24 @@ createPhotoTable = """CREATE TABLE THIN_SECTION_PHOTO(
     FOREIGN KEY (thinSectionID) REFERENCES Thin_Section_Data(thinSectionID)
     ON UPDATE CASCADE
     ON DELETE CASCADE);"""
+dropPhotoTable = "DROP TABLE IF EXISTS Thin_Section_Photo;"
+getPhoto = "SELECT * FROM Thin_Section_Photo;"
+getPhotoByID = """SELECT * FROM Thin_Section_Photo 
+                WHERE 
+                thinSectionID = {thinSectionID} 
+                AND 
+                thinSectionPhotoID = {thinSectionPhotoID};"""
+insertPhoto = """INSERT INTO Thin_Section_Photo (thinSectionID, thinSectionPhotoID, thinSectionPhoto) 
+                VALUES 
+                ({thinSectionID}, {thinSectionPhotoID}, '{thinSectionPhoto}');"""
+updatePhoto = """UPDATE Thin_Section_Photo SET thinSectionPhoto='{thinSectionPhoto}' 
+                WHERE 
+                thinSectionID = {thinSectionID} 
+                AND 
+                thinSectionPhotoID = {thinSectionPhotoID};"""
+deletePhoto = """DELETE FROM Thin_Section_Photo 
+                WHERE 
+                thinSectionID = {thinSectionID} 
+                AND 
+                thinSectionPhotoID = {thinSectionPhotoID};"""
 
-dropDataTable = "DROP TABLE IF EXISTS Thin_Section_Data;"
-
-dropSearchesTable = "DROP TABLE IF EXISTS Searches_Thin;"
-
-dropAddDataTable = "DROP TABLE IF EXISTS Add_Thin_Data;"
-
-dropPhotoTable = "DROP TABLE IF EXISTS THIN_SECTION_PHOTO;"

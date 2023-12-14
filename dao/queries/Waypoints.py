@@ -1,4 +1,5 @@
-createWaypointTable = """CREATE TABLE Waypoint_Data(
+# Waypoint_Data
+createDataTable = """CREATE TABLE Waypoint_Data(
 	waypointID INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	dateCollected DATE,
 	waypointName VARCHAR(50),
@@ -20,8 +21,76 @@ createWaypointTable = """CREATE TABLE Waypoint_Data(
     sectionName VARCHAR(30),
     commments VARCHAR(255)
 );"""
+dropDataTable = "DROP TABLE IF EXISTS Waypoint_Data;"
+getData = "SELECT * FROM Waypoint_Data;"
+getDataByID = "SELECT * FROM Waypoint_Data WHERE waypointID = {waypointID};"
+insertData = """INSERT INTO Waypoint_Data (
+                dateCollected, 
+                waypointName, 
+                projectName, 
+                latitude, 
+                longitude, 
+                northing, 
+                easting, 
+                utmZone1, 
+                utmZone2, 
+                datum, 
+                projection, 
+                fieldBook, 
+                fieldBookPage, 
+                formation, 
+                siteName, 
+                elevation, 
+                measuredSection, 
+                sectionName, 
+                commments
+                ) VALUES (
+                '{dateCollected}', 
+                '{waypointName}', 
+                '{projectName}', 
+                {latitude}, 
+                {longitude}, 
+                {northing}, 
+                {easting}, 
+                {utmZone1}, 
+                {utmZone2}, 
+                '{datum}', 
+                '{projection}', 
+                '{fieldBook}', 
+                {fieldBookPage}, 
+                '{formation}', 
+                '{siteName}', 
+                {elevation}, 
+                {measuredSection}, 
+                '{sectionName}', 
+                '{commments}');"""
+updateData = """UPDATE Waypoint_Data 
+                SET 
+                dateCollected='{dateCollected}', 
+                waypointName='{waypointName}', 
+                projectName='{projectName}', 
+                latitude={latitude}, 
+                longitude={longitude}, 
+                northing={northing}, 
+                easting={easting}, 
+                utmZone1={utmZone1}, 
+                utmZone2={utmZone2}, 
+                datum='{datum}', 
+                projection='{projection}', 
+                fieldBook='{fieldBook}', 
+                fieldBookPage={fieldBookPage}, 
+                formation='{formation}', 
+                siteName='{siteName}', 
+                elevation={elevation}, 
+                measuredSection={measuredSection}, 
+                sectionName='{sectionName}', 
+                commments='{commments}'
+                WHERE 
+                waypointID = {waypointID};"""
+deleteData = "DELETE FROM Waypoint_Data WHERE waypointID = {waypointID};"
 
-createSearchesWaypointTable = """CREATE TABLE Searches_Waypoint(
+# Searches_Waypoint
+createSearchesTable = """CREATE TABLE Searches_Waypoint(
 	userID INT UNSIGNED NOT NULL,
 	waypointID INT UNSIGNED NOT NULL,
 	PRIMARY KEY(userID, waypointID),
@@ -32,8 +101,32 @@ createSearchesWaypointTable = """CREATE TABLE Searches_Waypoint(
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );"""
+dropSearchesTable = "DROP TABLE IF EXISTS Searches_Waypoint;"
+getSearches = "SELECT * FROM Searches_Waypoint;"
+getSearchesByID = """SELECT * FROM Searches_Waypoint 
+                    WHERE 
+                    userID = {userID} 
+                    AND 
+                    waypointID = {waypointID};"""
+insertSearches = """INSERT INTO Searches_Waypoint (userID, waypointID) 
+                    VALUES 
+                    ({userID}, {waypointID});"""
+updateSearches = """UPDATE Searches_Waypoint 
+                    SET 
+                    userID = {newUserID} 
+                    WHERE 
+                    userID = {currentUserID} 
+                    AND 
+                    waypointID = {waypointID};"""
+deleteSearches = """DELETE FROM Searches_Waypoint 
+                    WHERE 
+                    userID = {userID} 
+                    AND 
+                    waypointID = {waypointID};"""
 
-createAddWaypointTable = """CREATE TABLE Searches_Waypoint(
+
+# Add_Waypoint
+createAddTable = """CREATE TABLE Add_Waypoint(
 	userID INT UNSIGNED NOT NULL,
 	waypointID INT UNSIGNED NOT NULL,
 	PRIMARY KEY(userID, waypointID),
@@ -44,9 +137,25 @@ createAddWaypointTable = """CREATE TABLE Searches_Waypoint(
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );"""
-
-dropWaypointTable = "DROP TABLE IF EXISTS Waypoint_Data;"
-
-dropSearchesWaypointTable = "DROP TABLE IF EXISTS Searches_Waypoint;"
-
-dropAddWaypointTable = "DROP TABLE IF EXISTS Add_Waypoint_Data;"
+dropAddTable = "DROP TABLE IF EXISTS Add_Waypoint;"
+getAdd = "SELECT * FROM Add_Waypoint;"
+getAddByID = """SELECT * FROM Add_Waypoint 
+                WHERE 
+                userID = {userID} 
+                AND 
+                waypointID = {waypointID};"""
+insertAdd = """INSERT INTO Add_Waypoint (userID, waypointID) 
+                VALUES 
+                ({userID}, {waypointID});"""
+updateAdd = """UPDATE Add_Waypoint 
+                SET 
+                serID = {newUserID} 
+                WHERE 
+                userID = {currentUserID} 
+                AND 
+                waypointID = {waypointID};"""
+deleteAdd = """DELETE FROM Add_Waypoint 
+                WHERE 
+                userID = {userID} 
+                AND 
+                waypointID = {waypointID};"""
