@@ -146,7 +146,7 @@ createPhotoTable = """CREATE TABLE Mesostructure_Photo(
     ON DELETE CASCADE
 );"""
 dropPhotoTable = "DROP TABLE IF EXISTS Mesostructure_Photo;"
-getPhotos = "SELECT * FROM Mesostructure_Photo;"
+getPhoto = "SELECT * FROM Mesostructure_Photo;"
 getPhotoByIDs = """SELECT * FROM Mesostructure_Photo 
                    WHERE 
                    mesostructureID = {mesostructureID} 
