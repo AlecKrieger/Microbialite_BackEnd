@@ -123,7 +123,24 @@ deleteSearches = """DELETE FROM Searches_Meso
                     mesostructureID = {mesostructureID};"""
 
 
-
+# Add_Meso_Data
 dropAddDataTable = "DROP TABLE IF EXISTS Add_Meso_Data;"
+getAddData = "SELECT * FROM Add_Meso_Data;"
+getAddDataByIDs = """SELECT * FROM Add_Meso_Data 
+                         WHERE analystID = {analystID} 
+                         AND 
+                         mesostructureID = {mesostructureID};"""
+insertAddData = """INSERT INTO Add_Meso_Data (analystID, mesostructureID) 
+                       VALUES 
+                       ({analystID}, {mesostructureID});"""
+updateAddData = """UPDATE Add_Meso_Data SET analystID = {newAnalystID} 
+                       WHERE analystID = {currentAnalystID} 
+                       AND 
+                       mesostructureID = {mesostructureID};"""
+deleteAddData = """DELETE FROM Add_Meso_Data 
+                       WHERE analystID = {analystID} 
+                       AND 
+                       mesostructureID = {mesostructureID};"""
+
 
 dropPhotoTable = "DROP TABLE IF EXISTS Mesostructure_Photo;"
