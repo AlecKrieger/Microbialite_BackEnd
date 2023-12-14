@@ -149,8 +149,8 @@ deleteSearches = """DELETE FROM Searches_Macro
                     macrostructureID = {macrostructureID};"""
 
 
-
-createAddMacroTable = """CREATE TABLE Add_Macro_Data(
+# Add_Macro_Data
+createAddTable = """CREATE TABLE Add_Macro_Data(
 	analystID INT UNSIGNED NOT NULL,
 	macrostructureID INT UNSIGNED NOT NULL,
 	PRIMARY KEY(analystID, macrostructureID),
@@ -160,7 +160,32 @@ createAddMacroTable = """CREATE TABLE Add_Macro_Data(
     FOREIGN KEY (macrostructureID) REFERENCES Macrostructure_Data(macrostructureID)
     ON UPDATE CASCADE
     ON DELETE CASCADE
-);   """
+);"""
+dropAddTable = "DROP TABLE IF EXISTS Add_Macro_Data;"
+getAdd = "SELECT * FROM Add_Macro_Data;"
+getAddByID = """SELECT * FROM Add_Macro_Data 
+                WHERE 
+                analystID = {analystID} 
+                AND 
+                macrostructureID = {macrostructureID};"""
+insertAdd = """INSERT INTO Add_Macro_Data (analystID, macrostructureID) 
+                VALUES 
+                ({analystID}, {macrostructureID});"""
+updateAdd = """UPDATE Add_Macro_Data 
+                SET 
+                macrostructureID = {newMacrostructureID} 
+                WHERE 
+                analystID = {analystID} 
+                AND 
+                macrostructureID = {currentMacrostructureID};"""
+deleteAdd = """DELETE FROM Add_Macro_Data 
+                WHERE 
+                analystID = {analystID} 
+                AND 
+                macrostructureID = {macrostructureID};"""
+
+
+
 
 createPhotoTable = """CREATE TABLE Macrostructure_Photo(
 	macrostructureID INT UNSIGNED NOT NULL,
@@ -173,6 +198,5 @@ createPhotoTable = """CREATE TABLE Macrostructure_Photo(
 );"""
 
 
-dropAddDataTable = "DROP TABLE IF EXISTS Add_Macro_Data;"
 
 dropPhotoTable = "DROP TABLE IF EXISTS Macrostructure_Photo;"
