@@ -151,8 +151,8 @@ deleteAdd = """DELETE FROM Add_Thin_Data
                 AND 
                 thinSectionID = {thinSectionID};"""
 
-
-createPhotoTable = """CREATE TABLE THIN_SECTION_PHOTO(
+# Thin_Section_Photo
+createPhotoTable = """CREATE TABLE Thin_Section_Photo(
 	thinSectionID INT UNSIGNED NOT NULL,
 	thinSectionPhotoID INT,
 	thinSectionPhoto VARCHAR(255),
@@ -160,6 +160,24 @@ createPhotoTable = """CREATE TABLE THIN_SECTION_PHOTO(
     FOREIGN KEY (thinSectionID) REFERENCES Thin_Section_Data(thinSectionID)
     ON UPDATE CASCADE
     ON DELETE CASCADE);"""
+dropPhotoTable = "DROP TABLE IF EXISTS Thin_Section_Photo;"
+getPhoto = "SELECT * FROM Thin_Section_Photo;"
+getPhotoByID = """SELECT * FROM Thin_Section_Photo 
+                WHERE 
+                thinSectionID = {thinSectionID} 
+                AND 
+                thinSectionPhotoID = {thinSectionPhotoID};"""
+insertPhoto = """INSERT INTO Thin_Section_Photo (thinSectionID, thinSectionPhotoID, thinSectionPhoto) 
+                VALUES 
+                ({thinSectionID}, {thinSectionPhotoID}, '{thinSectionPhoto}');"""
+updatePhoto = """UPDATE Thin_Section_Photo SET thinSectionPhoto='{thinSectionPhoto}' 
+                WHERE 
+                thinSectionID = {thinSectionID} 
+                AND 
+                thinSectionPhotoID = {thinSectionPhotoID};"""
+deletePhoto = """DELETE FROM Thin_Section_Photo 
+                WHERE 
+                thinSectionID = {thinSectionID} 
+                AND 
+                thinSectionPhotoID = {thinSectionPhotoID};"""
 
-
-dropPhotoTable = "DROP TABLE IF EXISTS THIN_SECTION_PHOTO;"
