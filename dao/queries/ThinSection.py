@@ -1,4 +1,5 @@
-createTSTable = """CREATE TABLE Thin_Section_Data(
+# Thin_Section_Data
+createDataTable = """CREATE TABLE Thin_Section_Data(
 	thinSectionID INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	tsDescription VARCHAR(255),
     mesostructureID INT UNSIGNED NOT NULL,
@@ -20,6 +21,66 @@ createTSTable = """CREATE TABLE Thin_Section_Data(
     ON UPDATE CASCADE
     ON DELETE SET NULL
 );"""
+dropDataTable = "DROP TABLE IF EXISTS Thin_Section_Data;"
+getData = "SELECT * FROM Thin_Section_Data;"
+getDataByID = "SELECT * FROM Thin_Section_Data WHERE thinSectionID = {thinSectionID};"
+insertData = """INSERT INTO Thin_Section_Data (
+                tsDescription, 
+                mesostructureID, 
+                primaryTexture, 
+                secondaryTexture, 
+                tertiaryTexture, 
+                otherTexture, 
+                cement1, 
+                cement2, 
+                porosity1, 
+                porosity2, 
+                mineralogy1, 
+                mineralogy2, 
+                porosityPercentEst, 
+                cementFillPorosity, 
+                clasticGrain1, 
+                clasticGrain2
+                ) VALUES (
+                '{tsDescription}', 
+                {mesostructureID}, 
+                '{primaryTexture}', 
+                '{secondaryTexture}', 
+                '{tertiaryTexture}', 
+                '{otherTexture}', 
+                '{cement1}', 
+                '{cement2}', 
+                '{porosity1}', 
+                '{porosity2}', 
+                '{mineralogy1}', 
+                '{mineralogy2}', 
+                {porosityPercentEst}, 
+                '{cementFillPorosity}', 
+                '{clasticGrain1}', 
+                '{clasticGrain2}');"""
+updateData = """UPDATE Thin_Section_Data SET 
+                tsDescription='{tsDescription}', 
+                mesostructureID={mesostructureID}, 
+                primaryTexture='{primaryTexture}', 
+                secondaryTexture='{secondaryTexture}', 
+                tertiaryTexture='{tertiaryTexture}', 
+                otherTexture='{otherTexture}', 
+                cement1='{cement1}', 
+                cement2='{cement2}', 
+                porosity1='{porosity1}', 
+                porosity2='{porosity2}', 
+                mineralogy1='{mineralogy1}', 
+                mineralogy2='{mineralogy2}', 
+                porosityPercentEst={porosityPercentEst}, 
+                cementFillPorosity='{cementFillPorosity}', 
+                clasticGrain1='{clasticGrain1}', 
+                clasticGrain2='{clasticGrain2}' 
+                WHERE 
+                thinSectionID = {thinSectionID};"""
+deleteData = """DELETE FROM Thin_Section_Data 
+                WHERE 
+                thinSectionID = {thinSectionID};"""
+
 
 createSearchesTSTable = """CREATE TABLE Searches_Thin(
 	userID INT UNSIGNED NOT NULL,
@@ -54,7 +115,6 @@ createPhotoTable = """CREATE TABLE THIN_SECTION_PHOTO(
     ON UPDATE CASCADE
     ON DELETE CASCADE);"""
 
-dropDataTable = "DROP TABLE IF EXISTS Thin_Section_Data;"
 
 dropSearchesTable = "DROP TABLE IF EXISTS Searches_Thin;"
 
