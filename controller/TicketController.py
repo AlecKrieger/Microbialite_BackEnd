@@ -1,29 +1,29 @@
 from dao import TicketDao
 from models.ticket import Ticket
 
-#TODO Update response statements
+#TODO Standardize response 
 
 def createTicketTables():
     result = TicketDao.createTables()
     if (result):
-        return {"Msg": "Ticket tables Created"}
+        return "Ticket tables Created"
     else:
-        return {"Msg": "Could not create Ticket tables"}
+        return "Could not create Ticket tables"
     
 def dropTicketTables():
     result = TicketDao.dropTables()
     if (result):
-        return {"Msg": "Ticket tables dropped"}
+        return "Ticket tables dropped"
     else:
-        return {"Msg": "Could not drop Ticket tables"}
+        return "Could not drop Ticket tables"
     
 def getTicketById(ticketID: int):
     result = TicketDao.getTicket(ticketID)
-    return {"ticketID": ticketID, "Ticket": result}
+    return result
 
 def getTickets():
     result = TicketDao.getTickets()
-    return {"Tickets" : result}
+    return result
 
 def getTicketsByUserId(userType, id):
     result = TicketDao.getTicketByUser(userType, id)
@@ -49,3 +49,12 @@ def insertTicket(data : Ticket):
         return {"Msg": f'Ticket #{result} created'}
     else:
         return {"Msg": "Could not insert ticket"}
+
+def getClosedTickets():
+    result = TicketDao.getClosedTickets()
+    return result
+    
+def getTicketNames():
+    result = TicketDao.getNamedTickets()
+    return result
+    

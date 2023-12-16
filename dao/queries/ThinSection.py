@@ -19,7 +19,7 @@ createDataTable = """CREATE TABLE Thin_Section_Data(
 	clasticGrain2 VARCHAR(20),
 	FOREIGN KEY (mesostructureID) REFERENCES Mesostructure_Data(mesostructureID)
     ON UPDATE CASCADE
-    ON DELETE SET NULL
+    ON DELETE CASCADE
 );"""
 dropDataTable = "DROP TABLE IF EXISTS Thin_Section_Data;"
 getData = "SELECT * FROM Thin_Section_Data;"
@@ -117,7 +117,7 @@ deleteSearches = """DELETE FROM Searches_Thin
                     thinSectionID = {thinSectionID};"""
 
 # Add_Thin_Data
-createAddTable = """CREATE TABLE Add_Thin_Data(
+createAddTable = """CREATE TABLE Add_Thin_Section_Data(
 	analystID INT UNSIGNED NOT NULL,
 	thinSectionID INT UNSIGNED NOT NULL,
 	PRIMARY KEY(analystID, thinSectionID),

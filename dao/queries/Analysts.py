@@ -7,9 +7,9 @@ createAnalystTable = """CREATE TABLE Analyst (
 
 dropAnalystTable = "DROP TABLE IF EXISTS Analyst;"
 
-getAnalysts = "SELECT * FROM TABLE Analyst;"
+getAnalysts = "SELECT * FROM Analyst;"
 
-getAnalystByID = "SELECT * FROM TABLE Analyst WHERE analystID = {analystID};"
+getAnalystByID = "SELECT * FROM Analyst WHERE analystID = {analystID};"
 
 insertAnalyst = "INSERT INTO Analyst (firstName, lastName, analystType) VALUES ('{firstName}', '{lastName}', '{analystType}');"
 

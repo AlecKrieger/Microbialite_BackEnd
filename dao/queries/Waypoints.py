@@ -129,8 +129,8 @@ deleteSearches = """DELETE FROM Searches_Waypoint
 createAddTable = """CREATE TABLE Add_Waypoint(
 	userID INT UNSIGNED NOT NULL,
 	waypointID INT UNSIGNED NOT NULL,
-	PRIMARY KEY(userID, waypointID),
-	FOREIGN KEY (userID) REFERENCES User(userID)
+	PRIMARY KEY(analystID, waypointID),
+	FOREIGN KEY (analystID) REFERENCES Analyst(analystID)
     ON UPDATE CASCADE
     ON DELETE CASCADE,
     FOREIGN KEY (waypointID) REFERENCES Waypoint_Data(waypointID)
@@ -159,3 +159,7 @@ deleteAdd = """DELETE FROM Add_Waypoint
                 userID = {userID} 
                 AND 
                 waypointID = {waypointID};"""
+
+filterWayptHSF = "SELECT * FROM Waypoint_Data WHERE projectName = 'HSF';"
+
+filterWayptLPAH = "SELECT * FROM Waypoint_Data WHERE projectName = 'LPAH';"

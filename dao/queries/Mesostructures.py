@@ -15,7 +15,7 @@ createDataTable = """CREATE TABLE Mesostructure_Data(
     mesostructureGrains VARCHAR(50),
 	FOREIGN KEY (macrostructureID) REFERENCES Macrostructure_Data(macrostructureID)
     ON UPDATE CASCADE
-    ON DELETE SET NULL
+    ON DELETE CASCADE
 );"""
 dropDataTable = "DROP TABLE IF EXISTS Mesostructure_Data;"
 getData = "SELECT * FROM Mesostructure_Data;"
@@ -76,7 +76,7 @@ createSearchesTable = """CREATE TABLE Searches_Meso(
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );"""
-dropSearchesTable = "DROP TABLE IF EXISTS Searches_Meso;"
+dropSearchesTable = "DROP TABLE IF EXISTS Searches_Mesostructure;"
 getSearches = "SELECT * FROM Searches_Meso;"
 getSearchesByIDs = """SELECT * FROM Searches_Meso 
                     WHERE 
@@ -86,7 +86,7 @@ getSearchesByIDs = """SELECT * FROM Searches_Meso
 insertSearches = """INSERT INTO Searches_Meso (userID, mesostructureID) 
                     VALUES 
                     ({userID}, {mesostructureID});"""
-updateSearches = """UPDATE Searches_Meso 
+updateSearches = """UPDATE Searches_Mesostructure 
                     SET 
                     userID = {newUserID} 
                     WHERE 
@@ -100,20 +100,20 @@ deleteSearches = """DELETE FROM Searches_Meso
                     mesostructureID = {mesostructureID};"""
 
 # Add_Meso_Data
-createAddTable = """CREATE TABLE Add_Meso_Data(
+createAddTable = """CREATE TABLE Add_Mesostructure_Data(
 	analystID INT UNSIGNED NOT NULL,
 	mesostructureID INT UNSIGNED NOT NULL,
 	PRIMARY KEY(analystID, mesostructureID),
 	FOREIGN KEY (analystID) REFERENCES Analyst(analystID)
     ON UPDATE CASCADE
     ON DELETE CASCADE,
-    FOREIGN KEY (mesostructureID) REFERENCES Waypoint_Data(waypointID)
+    FOREIGN KEY (mesostructureID) REFERENCES Mesostructure_Data(mesostructureID)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );"""
-dropAddTable = "DROP TABLE IF EXISTS Add_Meso_Data;"
-getAdd = "SELECT * FROM Add_Meso_Data;"
-getAddByIDs = """SELECT * FROM Add_Meso_Data 
+dropAddTable = "DROP TABLE IF EXISTS Add_Mesostructure_Data;"
+getAdd = "SELECT * FROM Add_Mesostructure_Data;"
+getAddByIDs = """SELECT * FROM Add_Mesostructure_Data 
                      WHERE 
                      analystID = {analystID} 
                      AND 

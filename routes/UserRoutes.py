@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 from models.user import User, Analyst
 from controller import UserController
 
@@ -18,12 +18,12 @@ async def deleteUser(id: int):
 @userRouter.get("/", status_code=200)
 async def getAllUsers():
     response = UserController.getUsers("user")
-    return {"Users": response}
+    return response
 
 @userRouter.get("/{id}", status_code=200)
 async def getAllUsers(id: int):
     response = UserController.getUser("user", id)
-    return {"User": response}
+    return response
 
 @userRouter.patch("/", status_code=200)
 async def updateUser(user: User):
@@ -35,6 +35,12 @@ async def insertAnalyst(analyst: Analyst):
     response = UserController.insertUser("analyst", analyst)
     return {"Msg": response}
 
+# @analystRouter.put("/", status_code=200)
+# async def insertAnalyst(request: Request):
+#     print(request)
+#     response = UserController.insertUser("analyst", request)
+#     return {"Msg": response}
+
 @analystRouter.delete("/{id}", status_code=200)
 async def deleteAnalyst(id: int):
     response = UserController.deleteUser("analyst", id)
@@ -43,12 +49,12 @@ async def deleteAnalyst(id: int):
 @analystRouter.get("/", status_code=200)
 async def getAllAnalysts():
     response = UserController.getUsers("analyst")
-    return {"Analyst": response}
+    return response
 
 @analystRouter.get("/{id}", status_code=200)
 async def getAnalyst(id: int):
     response = UserController.getUser("analyst", id)
-    return {"Analyst": response}
+    return response
 
 @userRouter.patch("/", status_code=200)
 async def updateAnalyst(analyst: Analyst):

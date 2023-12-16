@@ -59,10 +59,9 @@ def getTicket(ticketId):
         cursor = conn.cursor()
 
         cursor.execute(query)
-
-        ticket = cursor.fetchall()
-
-        result = ticket
+        r = [dict((cursor.description[i][0], value) \
+               for i, value in enumerate(row)) for row in cursor.fetchall()]
+        result = r[0] if r else None
     except MySQLdb.Error as e:
         print("MySQL Error:", e)
 
@@ -88,9 +87,9 @@ def getTicketByUser(userType: str, id: int):
 
         cursor.execute(query)
 
-        ticket = cursor.fetchall()
-
-        result = ticket
+        r = [dict((cursor.description[i][0], value) \
+               for i, value in enumerate(row)) for row in cursor.fetchall()]
+        result = r
     except MySQLdb.Error as e:
         print("MySQL Error:", e)
 
@@ -108,9 +107,9 @@ def getTickets():
 
         cursor.execute(query)
 
-        ticket = cursor.fetchall()
-
-        result = ticket
+        r = [dict((cursor.description[i][0], value) \
+               for i, value in enumerate(row)) for row in cursor.fetchall()]
+        result = r
     except MySQLdb.Error as e:
         print("MySQL Error:", e)
 
@@ -180,3 +179,48 @@ def deleteTicket(ticketId):
         cursor.close()
         conn.close()
     return result
+
+def getClosedTickets():
+    result = None
+    conn = connectToDB()
+    query = "SELECT * FROM Ticket WHERE status = 'CLOSED';"
+    try:
+        cursor = conn.cursor()
+
+        cursor.execute(query)
+        r = [dict((cursor.description[i][0], value) \
+               for i, value in enumerate(row)) for row in cursor.fetchall()]
+        print(r)
+        result = r
+    except MySQLdb.Error as e:
+        print("MySQL Error:", e)
+
+    finally:
+        cursor.close()
+        conn.close()
+    return result
+
+def getNamedTickets():
+    result = None
+    conn = connectToDB()
+    query = """SELECT * FROM Ticket 
+                    INNER JOIN User 
+                    ON Ticket.userID = User.userID
+                    INNER JOIN Analyst
+                    ON Ticket.analystID = Analyst.analystID;"""
+    try:
+        cursor = conn.cursor()
+
+        cursor.execute(query)
+
+        r = [dict((cursor.description[i][0], value) \
+               for i, value in enumerate(row)) for row in cursor.fetchall()]
+        result = r
+    except MySQLdb.Error as e:
+        print("MySQL Error:", e)
+
+    finally:
+        cursor.close()
+        conn.close()
+    return result
+

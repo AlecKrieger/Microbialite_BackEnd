@@ -127,8 +127,9 @@ def getUsers(userType):
     try:
         cursor = conn.cursor()
         cursor.execute(query)
-        users = cursor.fetchall()
-        success = users
+        r = [dict((cursor.description[i][0], value) \
+               for i, value in enumerate(row)) for row in cursor.fetchall()]
+        success = r
     except MySQLdb.Error as e:
         print("MySQL Error:", e)
 
@@ -152,8 +153,9 @@ def getUser(userType, userID):
     try:
         cursor = conn.cursor()
         cursor.execute(query)
-        users = cursor.fetchall()
-        success = users
+        r = [dict((cursor.description[i][0], value) \
+               for i, value in enumerate(row)) for row in cursor.fetchall()]
+        success = r[0] if r else None
     except MySQLdb.Error as e:
         print("MySQL Error:", e)
     finally:

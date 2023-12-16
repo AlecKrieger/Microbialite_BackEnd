@@ -5,18 +5,18 @@ from models.user import User, Analyst
 def createUserTables():
     result = UserDao.createTables()
     if (result):
-        return {"Msg": "User and Analyst tables Created"}
+        return "User and Analyst tables Created"
     else:
-        return {"Msg": "Could not create User and Analyst tables"}
+        return "Could not create User and Analyst tables"
     
     
 def dropUserTables():
     result = UserDao.dropTables()
 
     if (result):
-        return {"Msg": "User and Analyst tables dropped"}
+        return "User and Analyst tables dropped"
     else:
-        return {"Msg": "Could not drop User and Analyst tables"}
+        return "Could not drop User and Analyst tables"
     
 def insertUser(userType: str, data):
     result = UserDao.addUser(userType, data.model_dump())

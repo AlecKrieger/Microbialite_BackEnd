@@ -26,7 +26,7 @@ createDataTable = """CREATE TABLE Macrostructure_Data(
     columnShape VARCHAR(30),
     FOREIGN KEY (waypointID) REFERENCES Waypoint_Data(waypointID)
     ON UPDATE CASCADE
-    ON DELETE SET NULL
+    ON DELETE CASCADE
 );"""
 dropDataTable = "DROP TABLE IF EXISTS Macrostructure_Data;"
 getData = "SELECT * FROM Macrostructure_Data;"
